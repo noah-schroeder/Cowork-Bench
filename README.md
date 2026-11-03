@@ -3,6 +3,8 @@
 Results from the Cowork bench: which local models do a portfolio manager's work best inside MyRA Cowork.
 A static site (no build step, no dependencies) for GitHub Pages.
 
+### Note that this is fully vibe coded
+
 ## Updating the results
 
 The bench runs inside a Cowork sandbox, which has no internet and cannot reach this folder, so a script on
