@@ -1,0 +1,246 @@
+{
+  "categories": [
+    {"id": "trackers", "noun": "log and tracker", "name": "Logs & trackers",
+     "blurb": "Pull items out of messy meeting notes into a spreadsheet, or update one, without missing, inventing or duplicating any."},
+    {"id": "analysis", "noun": "analysis", "name": "Analysis",
+     "blurb": "Reconcile sources that disagree, and give the current answer rather than the one a stale file shows."},
+    {"id": "writing", "noun": "writing", "name": "Writing",
+     "blurb": "Turn the folder into something a person reads: a status report, a reply to a sponsor, a meeting brief."},
+    {"id": "presentations", "noun": "presentation", "name": "Presentations",
+     "blurb": "Build a slide deck that tells a committee what is wrong and asks for decisions."}
+  ],
+  "formats": {
+    "excel": "Excel",
+    "word": "Word",
+    "powerpoint": "PowerPoint",
+    "markdown": "Markdown"
+  },
+  "cowork": {
+    "pi_tools": [
+      {"name": "read", "label": "Read a file"},
+      {"name": "bash", "label": "Run a shell command"},
+      {"name": "edit", "label": "Edit a file"},
+      {"name": "write", "label": "Write a file"},
+      {"name": "grep", "label": "Search file contents"},
+      {"name": "find", "label": "Find files by pattern"},
+      {"name": "ls", "label": "List a folder"}
+    ],
+    "myra_tools": [
+      {"name": "read_document", "label": "Read document"},
+      {"name": "create_document", "label": "Create document"},
+      {"name": "look_at", "label": "Look at"},
+      {"name": "save_as_pdf", "label": "Save as PDF"},
+      {"name": "annotate_document", "label": "Comment on document"},
+      {"name": "check_document", "label": "Copyedit document"},
+      {"name": "write_requirements_check", "label": "Check requirements"},
+      {"name": "compare_documents", "label": "Compare versions"},
+      {"name": "status_chart", "label": "Draw status chart"},
+      {"name": "find_files", "label": "Find files"},
+      {"name": "files_since", "label": "Files changed"},
+      {"name": "ground_items", "label": "Check items"},
+      {"name": "todo_write", "label": "Task list"},
+      {"name": "present_files", "label": "Present files"},
+      {"name": "ask_question", "label": "Ask"}
+    ],
+    "skills": ["docx", "pptx", "xlsx", "pdf", "browser", "frontend-design", "apps"]
+  },
+  "tasks": [
+    {
+      "id": "at_risk", "title": "Which projects are in trouble", "short": "At-risk projects",
+      "category": "analysis", "format": "markdown", "output": "at-risk.md", "weights": [0.7, 0.3],
+      "trap": "The portfolio tracker is ten days stale. Since it was updated, Beacon slipped to Red and Ember improved to Amber, and only the meeting notes and emails say so.",
+      "about": "The simplest question a manager asks, and the easiest to get wrong. The tracker looks authoritative but is out of date; the truth is in this week's meetings and emails. A good answer is a short table of the six active projects with their current RAG status and a one-sentence reason each.",
+      "checks": {
+        "beacon_red": "Beacon is Red. The tracker still says Amber; this week's project meeting and the vendor's email say go-live slips three weeks.",
+        "ember_amber": "Ember is Amber. The tracker still says Red; the steering committee has since approved its recovery plan.",
+        "other_rags": "The four projects whose status has not changed (Atlas, Cascade, Drift, Falcon) get the right RAG.",
+        "reason_beacon": "Beacon's reason names the cause: the vendor's export tooling and the slipped go-live.",
+        "reason_drift": "Drift's reason names the cloud-cost overrun.",
+        "reason_ember": "Ember's reason names the site 2 recovery.",
+        "harbor_not_active": "Harbor, which closed in September, is not given a RAG as if it were active.",
+        "past_dates_in_folder": "Every date given for something that has already happened is one the folder holds: none misstated or made up. Dates ahead, such as a review date, are not checked."
+      },
+      "rubric": [
+        {"name": "correct_and_current", "weight": 2.0, "description": "Uses the latest information (meetings, emails) rather than the stale tracker; RAGs and reasons are right."},
+        {"name": "clear_and_brief", "weight": 1.0, "description": "A manager gets the answer in seconds; the table is complete and well formed."}
+      ]
+    },
+    {
+      "id": "status_report", "title": "Fortnightly status report", "short": "Status report",
+      "category": "writing", "format": "word", "output": "status reports/Status report <today>.docx", "weights": [0.6, 0.4],
+      "trap": "Only what changed since the last report counts. Several items were already reported last time and must not be presented as news, and Harbor is closed.",
+      "about": "A leadership update for the fortnight since the last report, which is in the folder. It tests whether the model reads the previous report and reports only what is new, gets every project's RAG right, includes the new dates, and keeps to about a page.",
+      "checks": {
+        "report_saved": "The new report is saved in status reports/ (half marks if it is saved somewhere else).",
+        "rag_correct": "Each of the six active projects gets its current RAG, including Beacon Red and Ember Amber.",
+        "beacon_new_date": "Gives Beacon's new EMEA go-live date.",
+        "ember_new_date": "Gives Ember's re-planned site 2 go-live date.",
+        "drift_two_regions": "Says the Drift pilot is now limited to two regions, the UK and Germany.",
+        "falcon_stage2_booked": "Gives the date the Falcon stage 2 audit is booked for.",
+        "harbor_not_active": "Harbor, which is closed, is not given a RAG as if it were active. Saying it is closed is fine.",
+        "past_dates_in_folder": "Every date given for something that has already happened is one the folder holds: none misstated or made up. Dates ahead, such as a review date, are not checked."
+      },
+      "rubric": [
+        {"name": "covers_the_period", "weight": 1.5, "description": "Reports what changed since the last report; does not recycle old news as new."},
+        {"name": "accurate_and_grounded", "weight": 2.0, "description": "Every statement matches the folder's files; nothing invented."},
+        {"name": "leadership_ready", "weight": 1.0, "description": "Opens with a short summary; about a page; scannable; plain language."}
+      ]
+    },
+    {
+      "id": "open_actions", "title": "Open action items", "short": "Open actions",
+      "category": "trackers", "format": "excel", "output": "open actions.xlsx", "weights": [0.8, 0.2],
+      "trap": "Some items were closed in later meetings or by email. Two Drift actions appear only in the body of a call transcript: its auto-generated summary misses them.",
+      "about": "Pull every open action item from four weeks of meetings, each project's notes written a different way, into one spreadsheet. A good tracker has one row per item with owner, action, due date, project and source meeting, and nothing that has been done since.",
+      "checks": {
+        "open_items_found": "Finds the open action items raised in the last four weeks, including the two that only the transcript body mentions.",
+        "done_items_left_out": "Leaves out the items closed since, in a later meeting or by email.",
+        "older_items_left_out": "Leaves out open items raised more than four weeks ago.",
+        "due_dates_right": "Gives each item its correct due date.",
+        "source_meeting_given": "Says which meeting each item came from.",
+        "row_count": "Has about one row per open item: no padding, no merged items.",
+        "past_dates_in_folder": "Every date given for something that has already happened is one the folder holds: none misstated or made up. Dates ahead, such as a review date, are not checked."
+      },
+      "rubric": [
+        {"name": "usable_tracker", "weight": 1.0, "description": "Clear columns (owner, action, due, project, meeting); one row per item; real dates."}
+      ]
+    },
+    {
+      "id": "raid_update", "title": "RAID log update", "short": "RAID log update",
+      "category": "trackers", "format": "excel", "output": "RAID log <today>.xlsx", "weights": [0.8, 0.2],
+      "trap": "Close two risks, add three, keep the layout, and keep the original file. Three risks that come up again in later meetings are already in the log and must not be added twice.",
+      "about": "Update an existing spreadsheet instead of making a new one: close what has been dealt with, add what is new, and leave everything else exactly as it was, saved as a copy so the original survives.",
+      "checks": {
+        "new_file_saved": "Saves the update as a new file, RAID log <today>.xlsx.",
+        "original_kept": "Leaves the original RAID log.xlsx unchanged.",
+        "layout_kept": "Keeps the layout: the four sheets (Risks, Issues, Assumptions, Dependencies) and the Risks columns in order.",
+        "dealt_with_risks_closed": "Closes the two risks dealt with since the last review: the late conveyor firmware (now installed) and the penetration-test vendor (now booked).",
+        "new_risks_added": "Adds the three new risks as Open: Beacon's export tooling, Drift's cloud costs, App Store review times.",
+        "new_risk_owners": "Gives each new risk its right owner.",
+        "new_risk_severity": "Gives each new risk its right severity.",
+        "other_risks_unchanged": "Leaves every other risk's status as it was.",
+        "no_duplicates": "Does not add second rows for risks that come up again but are already logged.",
+        "past_dates_in_folder": "Every date given for something that has already happened is one the folder holds: none misstated or made up. Dates ahead, such as a review date, are not checked."
+      },
+      "rubric": [
+        {"name": "faithful_update", "weight": 1.0, "description": "New rows match the existing style (IDs, dates, wording); closures say why."}
+      ]
+    },
+    {
+      "id": "steering_deck", "title": "Steering committee deck", "short": "Steering deck",
+      "category": "presentations", "format": "powerpoint", "output": "steering deck.pptx", "weights": [0.5, 0.5],
+      "trap": "One slide for each at-risk project and explicit asks, using the latest status rather than the stale tracker, which still shows Beacon Amber and Ember Red.",
+      "about": "A 6 to 8 slide deck for the steering committee: where the portfolio stands, a slide per at-risk project (what is wrong, the impact, the decision needed) and a closing slide listing the asks. Half the score is the judge's: is it decision-ready, accurate and clean? A judge that reads images sees the slides as pictures.",
+      "checks": {
+        "slide_count": "Has 6 to 8 slides, as asked (half marks for 5 or 9).",
+        "at_risk_slides": "Has a slide of its own for each at-risk project: Beacon, Drift and Ember.",
+        "no_slides_for_green_projects": "Gives no slide of its own to a Green project.",
+        "decisions_asked": "The closing slide asks for a decision on each at-risk project.",
+        "beacon_new_date": "Gives Beacon's new go-live date.",
+        "harbor_not_active": "Harbor, which is closed, is not given a RAG as if it were active. Saying it is closed is fine.",
+        "past_dates_in_folder": "Every date given for something that has already happened is one the folder holds: none misstated or made up. Dates ahead, such as a review date, are not checked."
+      },
+      "rubric": [
+        {"name": "decision_ready", "weight": 2.0, "description": "Each at-risk slide states problem, impact and a concrete decision; the asks are explicit."},
+        {"name": "accurate", "weight": 1.5, "description": "Facts and dates match the folder; uses the latest status, not the stale tracker."},
+        {"name": "visual_quality", "weight": 1.0, "description": "Clean, legible, consistent slides; not walls of text."}
+      ]
+    },
+    {
+      "id": "budget_check", "title": "Budget check", "short": "Budget check",
+      "category": "analysis", "format": "excel", "output": "budget check.xlsx", "weights": [0.8, 0.2],
+      "trap": "Actual spend must come from the finance export, which has a credit note, overhead lines and a closed project's trailing costs, not from the tracker's month-old figures.",
+      "about": "Finance arithmetic across two sources: approved budgets and remaining forecasts from the tracker, actual spend from the finance export. A good answer has one row per active project with budget, actuals, forecast at completion and variance in dollars and percent, and makes Drift, the one project materially over budget, stand out.",
+      "checks": {
+        "projects_listed": "Lists every active project.",
+        "budget_right": "Gives each project's approved budget.",
+        "actuals_from_finance": "Takes actual spend from the finance export, with Drift's credit note netted off, not from the tracker's stale figure.",
+        "forecast_at_completion": "Forecast at completion is actuals plus the tracker's remaining forecast.",
+        "variance_dollars": "Gives the variance against budget in dollars.",
+        "variance_percent": "Gives the variance as a percentage of budget.",
+        "harbor_not_active": "Harbor is not listed with figures as if it were active: it is closed, though its trailing costs are in the export. A note that it is excluded is fine.",
+        "past_dates_in_folder": "Every date given for something that has already happened is one the folder holds: none misstated or made up. Dates ahead, such as a review date, are not checked."
+      },
+      "rubric": [
+        {"name": "finance_ready", "weight": 1.0, "description": "Clear columns and number formats; totals or flags where useful; the over-budget project stands out."}
+      ]
+    },
+    {
+      "id": "sponsor_reply", "title": "Reply to the sponsor", "short": "Sponsor reply",
+      "category": "writing", "format": "markdown", "output": "reply to Helen.md", "weights": [0.6, 0.4],
+      "trap": "Helen asked three things: the new date, the cause, and what she needs to approve (a USD 18,400 licence extension). Answer all three, briefly.",
+      "about": "A short email back to the VP sponsoring Beacon. It tests reading an email thread together with the latest project notes, finding the one number she needs, and answering plainly, owning the problem without drama.",
+      "checks": {
+        "new_golive_date": "Gives the new go-live date.",
+        "cause_given": "Gives the cause: the vendor's export tooling needs rework.",
+        "ask_given": "Makes the ask: the licence extension and its USD 18,400 cost.",
+        "addressed_to_helen": "Is addressed to Helen.",
+        "short": "Is short: up to 220 words (half marks up to 350).",
+        "past_dates_in_folder": "Every date given for something that has already happened is one the folder holds: none misstated or made up. Dates ahead, such as a review date, are not checked."
+      },
+      "rubric": [
+        {"name": "answers_all_three", "weight": 2.0, "description": "Answers the date, the cause and the ask (with amount and timing) directly."},
+        {"name": "tone", "weight": 1.0, "description": "Short, plain, appropriate for a VP; owns the problem without drama."}
+      ]
+    },
+    {
+      "id": "one_on_one", "title": "1:1 brief", "short": "1:1 brief",
+      "category": "writing", "format": "word", "output": "Tom 1-1 prep.docx", "weights": [0.6, 0.4],
+      "trap": "Tom's items are spread across project meetings, the steering committee and the RAID log. Some are closed, one action is overdue, and one milestone is beyond the 30-day window.",
+      "about": "A one-page brief for a meeting with Tom Okafor, who leads the Drift project: his open actions, the risks he owns and his milestones in the next 30 days. A good brief is organised for the conversation: what is overdue, what needs a decision, what to ask.",
+      "checks": {
+        "open_actions": "Lists all of Tom's open actions, from any meeting and of any age, including the overdue one.",
+        "done_action_left_out": "Leaves out the action he has finished.",
+        "risks_owned": "Lists the open risks he owns, including the new cloud-cost risk.",
+        "closed_risk_left_out": "Leaves out the risk of his that has been closed.",
+        "milestones_next_30_days": "Lists his milestones due in the next 30 days, with their dates.",
+        "later_milestone_left_out": "Leaves out the milestone more than 30 days away.",
+        "one_page": "Fits on a page: up to 550 words (half marks up to 800).",
+        "past_dates_in_folder": "Every date given for something that has already happened is one the folder holds: none misstated or made up. Dates ahead, such as a review date, are not checked."
+      },
+      "rubric": [
+        {"name": "complete_and_current", "weight": 2.0, "description": "All of Tom's open actions, risks and near milestones; nothing closed or out of range."},
+        {"name": "useful_for_the_meeting", "weight": 1.0, "description": "Organised for a conversation: what to ask, what is overdue, what needs a decision."}
+      ]
+    },
+    {
+      "id": "decision_log", "title": "Decision log", "short": "Decision log",
+      "category": "trackers", "format": "excel", "output": "decision log.xlsx", "weights": [0.8, 0.2],
+      "trap": "Decisions hide in prose ('we agreed', 'we settled on') and transcripts. One discussion looks like a decision but had not been decided yet, and the archived project is out of scope.",
+      "about": "One row per decision across three months of project and steering committee meetings: the date, the project, the decision and who made or approved it. It tests recognising a decision however it is written, and telling it apart from a discussion.",
+      "checks": {
+        "decisions_found": "Finds the decisions, whether written as lists, prose, transcript lines or numbered minutes.",
+        "dates_right": "Dates each decision correctly.",
+        "decided_by_right": "Says who made or approved each one.",
+        "archive_left_out": "Logs no decision from the archived Harbor project. A note that the archive was left out is fine.",
+        "discussion_not_logged_as_decision": "Does not log Cascade's offline-mode discussion as a decision on the day it was only discussed.",
+        "row_count": "Has about one row per decision.",
+        "past_dates_in_folder": "Every date given for something that has already happened is one the folder holds: none misstated or made up. Dates ahead, such as a review date, are not checked."
+      },
+      "rubric": [
+        {"name": "faithful_log", "weight": 1.0, "description": "Decisions stated as decided, attributed and dated; no discussion points or duplicates."}
+      ]
+    }
+  ],
+  "folder": {
+    "company": "Corvane",
+    "persona": "Jordan Avery, Portfolio Manager",
+    "intro": "Every task works in the same folder: the desk of a portfolio manager at Corvane, a fictional company. It holds six active projects and one closed one, with every fact planted on purpose. The folder is dated relative to the day of each run, because Cowork's own tools read the real clock and the files' dates.",
+    "projects": [
+      {"code": "ATL", "name": "Atlas Data Platform", "phase": "Build", "lead": "Dana Whitfield", "notes": "checklist-style sync notes", "status": "Green"},
+      {"code": "BCN", "name": "Beacon CRM Migration", "phase": "Migration", "lead": "Marcus Lee", "notes": "Word minutes with action tables", "status": "Red (tracker: Amber)"},
+      {"code": "CSC", "name": "Cascade Mobile App", "phase": "Build", "lead": "Priya Raman", "notes": "a product director's prose", "status": "Green"},
+      {"code": "DRF", "name": "Drift Pricing Engine", "phase": "Pilot", "lead": "Tom Okafor", "notes": "call transcripts whose auto-summary misses actions", "status": "Amber"},
+      {"code": "EMB", "name": "Ember Warehouse Automation", "phase": "Rollout", "lead": "Sofia Marino", "notes": "site notes with bold labels", "status": "Amber (tracker: Red)"},
+      {"code": "FLC", "name": "Falcon Security Certification", "phase": "Audit", "lead": "Grace Chen", "notes": "formal Word minutes", "status": "Green"},
+      {"code": "HBR", "name": "Harbor Legacy Decommission", "phase": "Closed", "lead": "Elena Petrova", "notes": "archived checklist notes", "status": "Closed"}
+    ],
+    "sources": [
+      {"name": "Portfolio tracker.xlsx", "what": "Status, dates and money for every project. Last updated ten days ago, so partly stale."},
+      {"name": "RAID log.xlsx", "what": "Risks, issues, assumptions and dependencies, last reviewed about three weeks ago."},
+      {"name": "finance/", "what": "The finance export: every cost line to last month end, including a credit note and overhead lines."},
+      {"name": "meetings/", "what": "Three months of fortnightly notes per project, each project written its own way, plus steering committee minutes and the closed project's archive."},
+      {"name": "email/", "what": "This fortnight's emails, including the sponsor's questions and one that has nothing to do with any project."},
+      {"name": "status reports/", "what": "The last fortnightly status report."}
+    ]
+  }
+}

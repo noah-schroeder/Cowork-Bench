@@ -1,0 +1,5 @@
+{
+  "_how": "Your own lines for the 'In short' block, shown above the automatic ones. sel says where a note shows: all (the default) on the Overview, or trackers, analysis, writing or presentations on that tab of Results; fmt optionally narrows it to a file type (excel, word, powerpoint, markdown). link and link_text are optional. hide drops automatic findings by id: best, fast, lean, variant, mistake, context, leaders.",
+  "notes": [],
+  "hide": []
+}

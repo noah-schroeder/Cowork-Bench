@@ -1,0 +1,14 @@
+{
+  "_how": "Optional facts per model, keyed by the exact name typed into the bench. Every field is optional; keys starting with _ are ignored. Set hidden to true to keep a model off the site. family groups variants of one model (reasoning settings, quantizations); without it, names that differ only in a last word like low/xhigh or Q4_K_M are grouped.",
+  "_example": {
+    "family": "Qwen 3.8 27b",
+    "params": "27B",
+    "active": "3B",
+    "quant": "Q4_K_M",
+    "runtime": "llama.cpp (ROCm)",
+    "hardware": "Intel Core i5, 64 GB DDR5, AMD Radeon R9700",
+    "link": "https://huggingface.co/...",
+    "note": "One sentence about the model, shown on its page.",
+    "hidden": false
+  }
+}
