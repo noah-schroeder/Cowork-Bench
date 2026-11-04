@@ -95,7 +95,9 @@ export function overview(db, ctx) {
         tally(n, `tasks in ${db.categories.length} kinds of work`),
         tally(scoredRuns, "scored runs"),
         tally(db.updated ? new Date(db.updated).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }) : "–", "latest run"))));
-  const disclaimer = h("p", { class: "front-dek disclaimer" }, "These scores are a rough guide, not a ranking. The tasks are narrow, the hardware is one machine, and the judge is itself a local model. Read the numbers as an informal indicator of how these models tend to behave in Cowork, not as a definitive comparison.");
+  const disclaimer = h("div", { class: "bench-notice" },
+    h("p", { class: "notice-title", text: "Note" }),
+    h("p", {}, "This benchmark was written by Claude, has not been closely proofread by a human, and the scores are an informal indicator, not a ranking. The tasks are narrow, the hardware is one machine, and the judge is itself a local model. Read the numbers as a rough guide to how these models tend to behave in Cowork, not as a definitive comparison."));
   if (!rows.length) {
     return [head, disclaimer, h("section", { class: "standings solo" }, h("div", { class: "sec-head" }, h("h2", { text: "The standings" })),
       h("p", { class: "empty", text: "No model has run every task yet, so none is scored." }), alsoTested(db)), tested(db, ctx, scoredRuns, unjudged)];
